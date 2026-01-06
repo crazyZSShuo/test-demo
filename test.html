@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #007acc;
+            padding-bottom: 10px;
+        }
+        .test-section {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            background-color: #fafafa;
+        }
+        button {
+            background-color: #007acc;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #005a99;
+        }
+        input, textarea {
+            padding: 8px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .status {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+            display: none;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            display: block;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Test Page</h1>
+        
+        <div class="test-section">
+            <h2>Form Elements</h2>
+            <form id="testForm">
+                <div>
+                    <label for="name">Name:</label><br>
+                    <input type="text" id="name" name="name" placeholder="Enter your name">
+                </div>
+                <div>
+                    <label for="email">Email:</label><br>
+                    <input type="email" id="email" name="email" placeholder="Enter your email">
+                </div>
+                <div>
+                    <label for="message">Message:</label><br>
+                    <textarea id="message" name="message" rows="4" cols="50" placeholder="Enter your message"></textarea>
+                </div>
+                <div>
+                    <button type="button" onclick="submitForm()">Submit</button>
+                    <button type="button" onclick="clearForm()">Clear</button>
+                </div>
+            </form>
+            <div id="status" class="status"></div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Interactive Elements</h2>
+            <button onclick="showAlert()">Show Alert</button>
+            <button onclick="toggleText()">Toggle Text</button>
+            <div id="toggleText" style="margin-top: 10px; display: none;">
+                <p>This text was toggled on!</p>
+            </div>
+        </div>
+        
+        <div class="test-section">
+            <h2>Image Placeholder</h2>
+            <div style="width: 200px; height: 150px; background-color: #ddd; display: flex; align-items: center; justify-content: center;">
+                Image Placeholder
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showAlert() {
+            alert('Hello! This is a test alert.');
+        }
+        
+        function toggleText() {
+            const element = document.getElementById('toggleText');
+            if (element.style.display === 'none') {
+                element.style.display = 'block';
+            } else {
+                element.style.display = 'none';
+            }
+        }
+        
+        function submitForm() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            const status = document.getElementById('status');
+            
+            if (!name || !email || !message) {
+                status.className = 'status error';
+                status.textContent = 'Error: Please fill in all fields.';
+                return;
+            }
+            
+            status.className = 'status success';
+            status.textContent = 'Success: Form submitted successfully!';
+            
+            // Reset form after 2 seconds
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 2000);
+        }
+        
+        function clearForm() {
+            document.getElementById('testForm').reset();
+            document.getElementById('status').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
